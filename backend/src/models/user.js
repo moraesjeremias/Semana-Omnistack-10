@@ -9,7 +9,7 @@ const UserSchema = new mongoose.Schema({
     techs: [String],
     location: {
         type: GeoSchema,
-        index: '2dshpere'
+        createIndexes: '2dshpere'
     }
 });
 
