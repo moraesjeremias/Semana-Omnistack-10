@@ -3,9 +3,23 @@ const User = require('../models/user');
 
 
 module.exports = {
+
+    async index(request, response){
+        const allUsers = await User.find();
+
+        return response.json(allUsers);
+    },
+
     async store(request, response) {
 
         const { github_username, techs, latitude, longitude } = request.body;
+
+        try{
+            if(await User.findOne({github_username}))
+                return response.status(401).send('Esse usuário já foi cadastrado!');
+        } catch (error){
+            return response.status(400).send('Não foi possível cadastrar o usuário')
+        }
         
         const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
         
