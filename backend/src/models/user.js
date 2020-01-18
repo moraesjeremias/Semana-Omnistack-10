@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const GeoSchema = require('./utils/GeoSchema');
 
 const UserSchema = new mongoose.Schema({
     name: String,
@@ -6,6 +7,10 @@ const UserSchema = new mongoose.Schema({
     bio: String,
     avatar_url: String,
     techs: [String],
+    location: {
+        type: GeoSchema,
+        index: '2dshpere'
+    }
 });
 
 module.exports = mongoose.model('User', UserSchema);
