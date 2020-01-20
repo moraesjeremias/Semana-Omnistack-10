@@ -6,6 +6,9 @@ import "./main.css";
 
 function App() {
 
+  const [github_username, setGithubUsername] = useState('');
+  const [techs, setTechs] = useState('');
+
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
 
@@ -26,18 +29,35 @@ function App() {
     )
   });
 
+  async function handleCreateUser(e){
+    e.preventDefault();
+    
+  }
+
   return (
     <div id="app">
       <aside>
         <strong>Cadastrar</strong>
-        <form>
+        <form onSubmit={handleCreateUser}>
           <div className="input-block">
             <label htmlFor="github_username">Github username</label>
-            <input name="github_username" id="github_username" required />
+            <input 
+            type="string"
+            name="github_username" 
+            id="github_username" 
+            value={github_username}
+            onChange={e=> setGithubUsername(e.target.value)}
+            required />
           </div>
           <div className="input-block">
             <label htmlFor="techs">Languages and Frameworks</label>
-            <input name="tech" id="techs" required />
+            <input 
+            type="string"
+            name="tech" 
+            id="techs" 
+            value={techs}
+            onChange={e=> setTechs(e.target.value)}
+            required />
           </div>
           <div className="input-group">
             <div className="input-block">
