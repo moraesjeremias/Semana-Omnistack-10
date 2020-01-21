@@ -25,7 +25,7 @@ function App() {
         console.log(err);
       },
       {
-        timeout: 5000,
+        timeout: 30000,
       }
     )
   });
@@ -39,7 +39,9 @@ function App() {
       latitude,
       longitude,
     });
-    console.log(response.data);
+    
+    setGithubUsername('');
+    setTechs('');
   }
 
   return (
