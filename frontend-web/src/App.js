@@ -1,9 +1,9 @@
 import React, { useState ,useEffect } from "react";
+import Api from './services/api';
 import "./global.css";
 import "./App.css";
 import "./sidebar.css";
 import "./main.css";
-import Api from './services/api';
 
 function App() {
 
@@ -33,6 +33,13 @@ function App() {
   async function handleCreateUser(e){
     e.preventDefault();
 
+    const response = await Api.post('/users', {
+      github_username,
+      techs,
+      latitude,
+      longitude,
+    });
+    console.log(response.data);
   }
 
   return (
