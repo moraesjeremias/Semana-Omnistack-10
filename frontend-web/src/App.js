@@ -6,7 +6,7 @@ import "./sidebar.css";
 import "./main.css";
 
 function App() {
-
+  const [users, setUsers] = useState([]);
   const [github_username, setGithubUsername] = useState('');
   const [techs, setTechs] = useState('');
 
@@ -28,7 +28,17 @@ function App() {
         timeout: 30000,
       }
     )
-  });
+  }, []);
+
+  useEffect(() => {
+    async function loadUsers(){
+      const response = await Api.get('/users');
+
+      setUsers(response.data);
+    }
+
+    loadUsers();
+  }, []);
 
   async function handleCreateUser(e){
     e.preventDefault();
@@ -42,6 +52,8 @@ function App() {
     
     setGithubUsername('');
     setTechs('');
+    setUsers([...users, response.data]);
+
   }
 
   return (
@@ -96,50 +108,19 @@ function App() {
       </aside>
       <main>
         <ul>
-          <li className="dev-item">
+          {users.map(user =>(
+          <li key={user._id} className="dev-item">
             <header>
-              <img src="https://avatars3.githubusercontent.com/u/42787540?v=4" alt="_user_avatar" />
+              <img src={user.avatar_url} alt={user.name} />
               <div className="user-info">
-                <strong>Jeremias Moraes</strong>
-                <span>ReactJS, NodeJS</span>
+                <strong>{user.github_username}</strong>
+                <span>{user.techs.join(', ')}</span>
               </div>
             </header>
-            <p>CTO uCook</p>
-            <a href="https://github.com/moraesjeremias">Acesse meu perfil</a>
+            <p>{user.bio}</p>
+            <a href={`https://github.com/${github_username}`}>Acesse meu perfil</a>
           </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars3.githubusercontent.com/u/42787540?v=4" alt="_user_avatar" />
-              <div className="user-info">
-                <strong>Jeremias Moraes</strong>
-                <span>ReactJS, NodeJS</span>
-              </div>
-            </header>
-            <p>CTO uCook</p>
-            <a href="https://github.com/moraesjeremias">Acesse meu perfil</a>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars3.githubusercontent.com/u/42787540?v=4" alt="_user_avatar" />
-              <div className="user-info">
-                <strong>Jeremias Moraes</strong>
-                <span>ReactJS, NodeJS</span>
-              </div>
-            </header>
-            <p>CTO uCook</p>
-            <a href="https://github.com/moraesjeremias">Acesse meu perfil</a>
-          </li>
-          <li className="dev-item">
-            <header>
-              <img src="https://avatars3.githubusercontent.com/u/42787540?v=4" alt="_user_avatar" />
-              <div className="user-info">
-                <strong>Jeremias Moraes</strong>
-                <span>ReactJS, NodeJS</span>
-              </div>
-            </header>
-            <p>CTO uCook</p>
-            <a href="https://github.com/moraesjeremias">Acesse meu perfil</a>
-          </li>
+          ))}
         </ul>
       </main>
     </div>
