@@ -3,6 +3,7 @@ import "./global.css";
 import "./App.css";
 import "./sidebar.css";
 import "./main.css";
+import Api from './services/api';
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
 
   async function handleCreateUser(e){
     e.preventDefault();
-    
+
   }
 
   return (
