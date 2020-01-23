@@ -36,6 +36,8 @@ function UserForm({ onSubmit }) {
 
       setGithubUsername('');
       setTechs('');
+      setLatitude('');
+      setLongitude('');
     }
 
     return(
