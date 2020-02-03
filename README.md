@@ -2,10 +2,15 @@
 ### 💻 Tecnologias usadas
 
 (M)ongo
+
 (E)xpress
+
 (R)eact
+
 (N)ode.JS
+
 Axios
+
 React Native
 
 
